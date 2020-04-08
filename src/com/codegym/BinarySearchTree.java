@@ -61,30 +61,42 @@ public class BinarySearchTree<E extends Comparable<E>> extends AbstractTree<E> {
         return e.compareTo(treeNode.element) < 0 ? find(treeNode.left, e) : find(treeNode.right, e);
     }
 
+    public E minValue(TreeNode<E> treeNode) {
+        E min = treeNode.element;
+        while (treeNode.left != null) {
+            min = treeNode.left.element;
+            treeNode = treeNode.left;
+        }
+        return min;
+    }
+
     @Override
     public boolean remove(TreeNode<E> treeNode, E e) {
+        treeNode = removeNode(treeNode, e);
         if (treeNode == null) {
             return false;
         }
+        return true;
+    }
+
+    TreeNode<E> removeNode(TreeNode<E> treeNode, E e) {
+        if (treeNode == null) {
+            return null;
+        }
         if (e.compareTo(treeNode.element) < 0) {
-            return remove(treeNode.left, e);
+            treeNode.left = removeNode(treeNode.left, e);
         } else if (e.compareTo(treeNode.element) > 0) {
-            return remove(treeNode.right, e);
+            treeNode.right = removeNode(treeNode.right, e);
         } else {
             if (treeNode.left == null) {
-                treeNode = treeNode.right;
+                return treeNode.right;
             } else if (treeNode.right == null) {
-                treeNode = treeNode.left;
-            } else {
-                TreeNode<E> temp = treeNode.left;
-                while (temp.right != null) {
-                    temp = temp.right;
-                }
-                treeNode.element = temp.element;
-                return remove(treeNode.left, temp.element);
+                return treeNode.left;
             }
+            treeNode.element = minValue(treeNode);
+            treeNode.left = removeNode(treeNode.left, treeNode.element);
         }
-        return true;
+        return treeNode;
     }
 
     @Override

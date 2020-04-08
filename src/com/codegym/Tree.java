@@ -14,4 +14,6 @@ public interface Tree<E> {
     boolean find(TreeNode<E> treeNode, E e);
 
     boolean remove(TreeNode<E> treeNode, E e);
+
+    E minValue(TreeNode<E> treeNode);
 }

@@ -2,14 +2,16 @@ package com.codegym;
 
 public class Main {
     public static void main(String[] args) {
-        BinarySearchTree<String> tree = new BinarySearchTree<>();
-        tree.insert("George");
-        tree.insert("Michael");
-        tree.insert("Tom");
-        tree.insert("Adam");
-        tree.insert("Jones");
-        tree.insert("Peter");
-        tree.insert("Daniel");
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.insert(60);
+        tree.insert(55);
+        tree.insert(100);
+        tree.insert(45);
+        tree.insert(57);
+        tree.insert(67);
+        tree.insert(107);
+        tree.insert(59);
+        tree.insert(101);
         System.out.println("Inorder (sorted): ");
         tree.inorder();
         System.out.println();
@@ -20,7 +22,19 @@ public class Main {
         tree.postOrder();
         System.out.println();
         System.out.println("The number of nodes is: " + tree.getSize());
-        System.out.println(tree.find(tree.root, "George"));
-        System.out.println(tree.remove(tree.root, "Tom"));
+        System.out.println(tree.find(tree.root, 101));
+        System.out.println("Before remove 100");
+        tree.inorder();
+        System.out.println();
+        System.out.println(tree.remove(tree.root, 100));
+        System.out.println("After remove 100");
+        tree.inorder();
+        System.out.println();
+        System.out.println("Before remove 55");
+        tree.inorder();
+        System.out.println();
+        tree.remove(tree.root, 55);
+        System.out.println("After remove 55");
+        tree.inorder();
     }
 }
